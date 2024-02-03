@@ -12,11 +12,6 @@ blueprint = flask.Blueprint(
 )
 
 
-def init(app_: Flask):
-    global app
-    app = app_
-
-
 @blueprint.route('/register', methods=['POST'])
 def create_user():
     data = request.get_json()
@@ -41,9 +36,9 @@ def login_user():
         return make_response(jsonify({'message': 'Uncorrect passsword'}), 401)
 
 
-@blueprint.route('/user/<str:username>', methods=['GET'])
-def get_user(id):
-    user = dm.get_user(id)
+@blueprint.route('/user/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    user = dm.get_user(user_id)
     return jsonify(user)
 
 
