@@ -16,10 +16,9 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     __tablename__ = 'users'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
-    last_name_user = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    first_name_user = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    last_name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    first_name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    login = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     phonenumber = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     pincode = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     email = sqlalchemy.Column(sqlalchemy.String, nullable=True)
