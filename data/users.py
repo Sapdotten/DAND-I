@@ -29,6 +29,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
 
     transactions = orm.relationship("Transaction", back_populates="user")
+    categories = orm.relationship("Category", back_populates="user")
 
     def __repr__(self):
         return f'<User> {self.id} {self.first_name_user} {self.last_name_user} {self.email}'

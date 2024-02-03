@@ -42,5 +42,8 @@ def set_session_id(username: str, session_id: str):
     pass
 
 
-def delete_user(username: str):
+def delete_user(user_id: int):
     """Пусть удалаяет юзера нахой"""
+    user = db_sess.query(User).get(user_id)
+    db_sess.delete(user)
+    db_sess.commit()
