@@ -1,7 +1,7 @@
 from flask import *
 from flask_login import LoginManager, login_user, login_required, logout_user
 from data import db_session
-from controllers import user_controller
+from controllers import user_api
 
 app = Flask(__name__)
 login_manager = LoginManager()
