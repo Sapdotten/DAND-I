@@ -17,7 +17,7 @@ def not_found(_):
 
 def main():
     db_session.global_init("db/database.db")
-    app.register_blueprint(user_controller.blueprint)
+    app.register_blueprint(user_api.blueprint)
     app.run()
 
 
