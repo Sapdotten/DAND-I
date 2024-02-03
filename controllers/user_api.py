@@ -40,7 +40,7 @@ def login_user():
 @blueprint.route('/user/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     user = dm.get_user(user_id)
-    return jsonify(user)
+    return user
 
 
 # @blueprint.route('/user/<int:id>', methods=['PUT'])

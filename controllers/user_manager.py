@@ -23,7 +23,7 @@ def create_user(user_name: str, email: str, password: str):
     db_sess.commit()
 
 
-def get_user(user_id: int) -> Union[None, dict]:
+def get_user(user_id: int) -> Union[None, jsonify]:
     """
     Пусть возвращает пользователя полностью со всеми полями
     :param usesrname: юзернаме
@@ -33,7 +33,7 @@ def get_user(user_id: int) -> Union[None, dict]:
     if not user:
         return jsonify({'error': 'Not found'})
     return jsonify({'user': user.to_dict(
-        only=('id', 'first_name_user', 'email', 'password', 'pincode')
+        only=('id', 'first_name', 'email', 'password', 'pincode')
     )})
 
 
