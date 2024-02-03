@@ -3,7 +3,6 @@ from datetime import datetime
 from flask import jsonify
 
 from data import db_session
-from data.users import User
 
 db_session.global_init("db/database.db")
 db_sess = db_session.create_session()
@@ -20,10 +19,11 @@ def get_transactions_with_category(session_id: str, category: str) -> jsonify:
     """Пусть возвращает список транзакций с заданной категорией за все время"""
 
 
-def add_transaction(session_id: str, type: str, sum: float, date: datetime, description: str, picture: str):
+def add_transaction(session_id: str, bill: str, type: str, sum: float, date: datetime, description: str, picture: str):
     """
-    Пусть добавляет транзакцию
+    Пусть добавляет транзакцию и меняет сумму счета.
     :param session_id: session_id
+    :param bill: счет транзакции
     :param type: 'income' или 'outcome'
     :param sum: сумма транзакции
     :param date: дата транзакции
@@ -34,7 +34,7 @@ def add_transaction(session_id: str, type: str, sum: float, date: datetime, desc
 
 def delete_transaction(session_id: str, transaction_id: int):
     """
-    Удаляет транзакции
+    Удаляет транзакции и меняет сумму счета
     :param session_id: session id
     :param transaction_id: айди транзакции
     """
