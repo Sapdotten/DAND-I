@@ -1,7 +1,7 @@
 import flask
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, request, make_response, jsonify
-from data.user import User
+from data.users import User
 from uuid import uuid4
 
 
