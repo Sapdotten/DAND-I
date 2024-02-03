@@ -1,8 +1,4 @@
-import flask
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask import Flask, request, make_response
-from app import app, db
-from data.users import Users
+
 
 
 @app.route("/register", methods=('POST',))
