@@ -1,0 +1,28 @@
+{
+  "transactions": [
+    {
+      "user_id": 1,
+      "type": "incoming",
+      "sum": 16.0,
+      "date": "04022024",
+      "description": "Получил зарплату на заводе",
+      "picture": "pic_addr"
+    },
+    {
+      "user_id": 1,
+      "type": "outcoming",
+      "sum": -3.0,
+      "date": "04022024",
+      "description": "Купил энергетик",
+      "picture": "pic_addr"
+    },
+    {
+      "user_id": 2,
+      "type": "outcoming",
+      "sum": -10.0,
+      "date": "04022024",
+      "description": "Купил новые ",
+      "picture": "pic_addr"
+    }
+  ]
+}
