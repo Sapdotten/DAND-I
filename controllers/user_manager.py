@@ -9,8 +9,11 @@ db_session.global_init("db/database.db")
 db_sess = db_session.create_session()
 
 
-def get_user_password(username: str) -> Union[None, str]:
+def check_user_password(email: str, password: str) -> Union[None, str]:
     """Должен возвращать пароль юзера по его имени, если пароля нет, то пусть возвращает None"""
+
+    user = db_sess.query(User).filter(User.email == email).first()
+    return user.check_password(password)
 
 
 def create_user(user_name: str, email: str, password: str):
