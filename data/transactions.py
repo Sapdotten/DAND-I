@@ -22,5 +22,8 @@ class Transaction(SqlAlchemyBase):
 
     user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
     category_operation_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("categories.id"))
+    bill_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
+
     user = orm.relationship('User')
     category = orm.relationship('Category')
+    bill = orm.relationship('Bill')
