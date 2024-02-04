@@ -61,3 +61,10 @@ def get_balance():
     data = request.get_json()
     balance = dm.get_balance(data['user_id'])
     return make_response(balance, 200)
+
+
+@blueprint.route('/set_balance', methods=['POST'])
+def set_balance():
+    data = request.get_json()
+    dm.set_balance(data['user_id'], data['balance'])
+    return make_response(jsonify({"Message": "Balance changed"}), 200)

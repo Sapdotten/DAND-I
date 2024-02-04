@@ -51,4 +51,9 @@ def delete_user(user_id: int):
 
 def get_balance(user_id: int):
     user = db_sess.query(User).get(user_id)
-    return jsonify({'balance': user.to_dict(only=('balance', ))})
+    return jsonify({'balance': user.to_dict(only=('balance',))})
+
+
+def set_balance(user_id: int, sum: float):
+    user = db_sess.query(User).get(user_id)
+    """Прописать установление баланса"""

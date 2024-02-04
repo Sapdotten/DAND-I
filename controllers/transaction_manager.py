@@ -56,7 +56,7 @@ def get_transactions_with_category(user_id: int, category: str) -> jsonify:
         for item in trs]})
 
 
-def add_transaction(bill_id: str, type: str, sum: float, date: datetime, description: str, picture: str):
+def add_transaction(user_id: str, type: str, sum: float, date: datetime, description: str, picture: str):
     """
     Пусть добавляет транзакцию и меняет сумму счета.
     :param session_id: session_id
@@ -70,13 +70,12 @@ def add_transaction(bill_id: str, type: str, sum: float, date: datetime, descrip
 
     bill = db_sess.query(Bill).get(bill_id)
     tr = Transaction()
-    tr.bill_id = bill_id
+    tr.user_id = user_id
     tr.type_operation = type
     tr.sum_operation = sum
     tr.date_time_operation = date
     tr.message_operation = description
     tr.pictures_str_operation = picture
-    tr.user_id = bill.user_id
     db_sess.add(tr)
     db_sess.commit()
 
