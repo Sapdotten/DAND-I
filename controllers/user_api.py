@@ -2,6 +2,7 @@ import flask
 from flask import request, make_response, jsonify, Response
 import controllers.user_manager as dm
 from uuid import uuid4
+from flask_cors import cross_origin
 
 blueprint = flask.Blueprint(
     'user_controller',
@@ -11,30 +12,30 @@ blueprint = flask.Blueprint(
 
 
 @blueprint.route('/register', methods=['POST'])
+#@cross_origin()
 def create_user():
     data = request.get_json()
-    dm.create_user(data['user_name'], data['email'], data['password'])
+    dm.create_user(data['username'], data['email'], data['password'])
     return make_response(jsonify({'message': 'User created successfully'}), 201)
 
 
 @blueprint.route('/login', methods=['POST'])
+#@cross_origin()
 def login_user():
     data = request.get_json()
-    user_password = dm.get_user_password(data['user_name'])
+    user_password = dm.get_user_password(data['username'])
     if user_password is None:
         return make_response(jsonify({'message': 'Bad request'}), 400)
 
     if data['password'] == user_password:
-        session_id = str(uuid4())
-        dm.set_session_id(data['username'], session_id)
-        resp = Response()
-        resp.set_cookie('authorization', session_id)
-        return resp
+
+        return make_response(jsonify({"user_id":123400}), 200)
     else:
         return make_response(jsonify({'message': 'Uncorrect passsword'}), 401)
 
 
 @blueprint.route('/user/<int:user_id>', methods=['GET'])
+#@cross_origin()
 def get_user(user_id):
     user = dm.get_user(user_id)
     return user
@@ -51,12 +52,14 @@ def get_user(user_id):
 
 
 @blueprint.route('/user/<int:username>', methods=['DELETE'])
+#@cross_origin()
 def delete_user(username):
     dm.delete_user(username)
     return jsonify({'message': 'User deleted successfully'})
 
 
 @blueprint.route('/balance', methods=['POST'])
+#@cross_origin()
 def get_balance():
     data = request.get_json()
     balance = dm.get_balance(data['user_id'])
@@ -64,6 +67,7 @@ def get_balance():
 
 
 @blueprint.route('/set_balance', methods=['POST'])
+#@cross_origin()
 def set_balance():
     data = request.get_json()
     dm.set_balance(data['user_id'], data['balance'])

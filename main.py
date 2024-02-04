@@ -1,13 +1,16 @@
 from flask import *
 from flask_login import LoginManager, login_user, login_required, logout_user
 from data import db_session
-from controllers import user_api, transaction_api, bill_api
+from controllers import user_api, transaction_api
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app, origins='*')
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 app.config['SECRET_KEY'] = 'DAND-I_secret_key'
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.errorhandler(404)
@@ -19,7 +22,6 @@ def main():
     db_session.global_init("db/database.db")
     app.register_blueprint(user_api.blueprint)
     app.register_blueprint(transaction_api.blueprint)
-    app.register_blueprint(bill_api.blueprint)
     app.run()
 
 
