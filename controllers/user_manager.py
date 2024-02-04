@@ -16,6 +16,13 @@ def check_user_password(email: str, password: str) -> Union[None, str]:
     return user.check_password(password)
 
 
+def get_user_id(email: str):
+    """Возвращает id пользователя"""
+
+    user = db_sess.query(User).filter(User.email == email).first()
+    return user.id
+
+
 def create_user(user_name: str, email: str, password: str):
     """Создает юзера в бд"""
     user = User()
