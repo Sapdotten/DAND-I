@@ -15,17 +15,17 @@ db_sess = db_session.create_session()
 def get_transactions_with_date(user_id: int, date1: datetime, date2: datetime, type: str) -> jsonify:
     """Пусть возвращает списсок транзакций пользователя с заданным session_id с первой даты по вторую включительно
     type: 'all' - все транзакции
-            'income' - доходы
-            'outcome' - расходы"""
+            'incoming' - доходы
+            'outcoming' - расходы"""
 
-    if type == 'income':
+    if type == 'incoming':
         trs = db_sess.query(Transaction).filter(and_(
             date1 <= Transaction.date_time_operation <= date2, Transaction.user_id == user_id,
-            Transaction.type_operation == 'income')).all()
-    elif type == 'outcome':
+            Transaction.type_operation == 'incoming')).all()
+    elif type == 'outcoming':
         trs = db_sess.query(Transaction).filter(and_(
             date1 <= Transaction.date_time_operation <= date2, Transaction.user_id == user_id,
-            Transaction.type_operation == 'income')).all()
+            Transaction.type_operation == 'outcoming')).all()
     else:
         trs = db_sess.query(Transaction).filter(and_(
             date1 <= Transaction.date_time_operation <= date2, Transaction.user_id == user_id)
@@ -48,6 +48,7 @@ def get_transactions_with_category(user_id: int, category: str) -> jsonify:
         category_id = db_sess.query(Category).filter(Category.name_category == category)
         trs = db_sess.query(Transaction).filter(and_(
             Transaction.user_id == user_id, Transaction.category_operation_id == category_id)).all()
+    print(trs)
 
     return jsonify({'transactions': [item.to_dict(
         only=('id', 'sum_operation', 'type_operation', 'date_time_operation', 'message_operation',
