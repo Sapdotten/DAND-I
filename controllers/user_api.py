@@ -54,3 +54,10 @@ def get_user(user_id):
 def delete_user(username):
     dm.delete_user(username)
     return jsonify({'message': 'User deleted successfully'})
+
+
+@blueprint.route('/balance', methods=['POST'])
+def get_balance():
+    data = request.get_json()
+    balance = dm.get_balance(data['user_id'])
+    return make_response(balance, 200)

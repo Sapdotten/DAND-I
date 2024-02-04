@@ -47,3 +47,8 @@ def delete_user(user_id: int):
     user = db_sess.query(User).get(user_id)
     db_sess.delete(user)
     db_sess.commit()
+
+
+def get_balance(user_id: int):
+    user = db_sess.query(User).get(user_id)
+    return jsonify({'balance': user.to_dict(only=('balance', ))})

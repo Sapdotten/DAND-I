@@ -43,3 +43,5 @@ def delete_transaction():
     data = request.get_json()
     dm.delete_transaction(data['transaction_id'])
     return make_response(jsonify({'transactiod delete'}), 200)
+
+
