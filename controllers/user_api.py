@@ -46,9 +46,9 @@ def get_user(user_id):
 #     return jsonify({'message': 'User updated successfully'})
 
 
-@blueprint.route('/user/<int:username>', methods=['DELETE'])
-def delete_user(username):
-    dm.delete_user(username)
+@blueprint.route('/user/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    dm.delete_user(user_id)
     return jsonify({'message': 'User deleted successfully'})
 
 

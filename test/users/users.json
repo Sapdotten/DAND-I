@@ -1,17 +1,17 @@
 {
   "users": [
     {
-      "user_name": "Man1",
+      "username": "Man1",
       "email": "man1@mail.ru",
       "password": "man1"
     },
     {
-      "user_name": "Man2",
+      "username": "Man2",
       "email": "man2@mail.ru",
       "password": "man2"
     },
     {
-      "user_name": "Man3",
+      "username": "Man3",
       "email": "man3@mail.ru",
       "password": "man3"
     }
