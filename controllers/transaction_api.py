@@ -32,8 +32,9 @@ def get_transactions_between_dates():
 def add_transaction():
     data = request.get_json()
     date = datetime.strptime(data['date'], '%d%d%m%m%Y%Y%Y%Y')
-    dm.add_transaction(data['user_id'], data['bill_id'], data['type'], data['sum'], date, data['description'],
-                       data['picture'])
+    dm.add_transaction(bill_id=data['bill_id'], type=data['type'], sum=data['sum'], date=date,
+                       description=data['description'],
+                       picture=data['picture'])
     return make_response(jsonify({'message': 'transaction_added'}), 200)
 
 

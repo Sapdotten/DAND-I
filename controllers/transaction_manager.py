@@ -7,7 +7,6 @@ from data import db_session
 from data.transactions import Transaction
 from data.categories import Category
 from data.bills import Bill
-from data.users import User
 
 db_session.global_init("db/database.db")
 db_sess = db_session.create_session()

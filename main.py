@@ -1,7 +1,7 @@
 from flask import *
 from flask_login import LoginManager, login_user, login_required, logout_user
 from data import db_session
-from controllers import user_api, transaction_api
+from controllers import user_api, transaction_api, bill_api
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -19,6 +19,7 @@ def main():
     db_session.global_init("db/database.db")
     app.register_blueprint(user_api.blueprint)
     app.register_blueprint(transaction_api.blueprint)
+    app.register_blueprint(bill_api.blueprint)
     app.run()
 
 
