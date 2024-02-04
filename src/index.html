@@ -9,8 +9,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
             
     <title>Document</title>
+    <style>
+        #preloader{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body class="blue-grey darken-4">
-    <app-root></app-root>
+    <app-root>
+        <div id="preloader">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </app-root>
 </body>
 </html>

@@ -1,28 +1,22 @@
 {
-  "name": "dand_i_frontend",
-  "version": "0.0.1",
+  "name": "native-framework",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "json-server --watch db.json --port 3000",
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack -p"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sapdotten/DAND-I.git#front_dev"
-  },
-  "author": "dandi",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Sapdotten/DAND-I/issues"
+  "devDependencies": {
+    "html-webpack-plugin": "^2.29.0",
+    "json-server": "^0.11.2",
+    "webpack": "^3.2.0",
+    "webpack-dev-server": "^2.5.1"
   },
-  "homepage": "https://github.com/Sapdotten/DAND-I/tree/front_dev#readme",
   "dependencies": {
-    "html-webpack-plugin": "^5.6.0",
-    "path": "^0.12.7",
-    "webpack": "^5.90.1",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "materialize-css": "^0.99.0"
   }
 }
