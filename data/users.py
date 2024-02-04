@@ -27,6 +27,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     plans = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     custom_user_category = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
+    money = sqlalchemy.Column(sqlalchemy.Float, default=0.0)
 
     transactions = orm.relationship("Transaction", back_populates="user")
     categories = orm.relationship("Category", back_populates="user")
