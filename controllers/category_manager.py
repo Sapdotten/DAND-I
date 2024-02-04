@@ -13,7 +13,7 @@ def get_categories(user_id: str) -> jsonify:
 
     categories = db_sess.query(Category).filter(Category.user_id == user_id).all()
     return jsonify({'categories': [item.to_dict(
-        only=('id', 'name_category')
+        only=('id', 'name_category', 'user_id')
     )
         for item in categories]})
 

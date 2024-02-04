@@ -6,7 +6,8 @@
       "sum": 16.0,
       "date": "04022024",
       "description": "Получил зарплату на заводе",
-      "picture": "pic_addr"
+      "picture": "pic_addr",
+      "category": "beauty"
     },
     {
       "user_id": 1,
@@ -14,15 +15,17 @@
       "sum": -3.0,
       "date": "04022024",
       "description": "Купил энергетик",
-      "picture": "pic_addr"
+      "picture": "pic_addr",
+      "category": "university"
     },
     {
       "user_id": 2,
       "type": "outcoming",
       "sum": -10.0,
       "date": "04022024",
-      "description": "Купил новые ",
-      "picture": "pic_addr"
+      "description": "Купил новую морковку ",
+      "picture": "pic_addr",
+      "category": "food"
     }
   ]
 }

@@ -11,5 +11,10 @@
     {
       "name_category": "transport",
       "user_id": null
-    }]
+    },
+    {
+      "name_category": "university",
+      "user_id": 1
+    }
+  ]
 }

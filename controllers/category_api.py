@@ -29,5 +29,5 @@ def delete_category():
 @blueprint.route('/get_categories', methods=['POST'])
 def get_categories():
     data = request.get_json()
-    categories = dm.delete_category(data['user_id'])
+    categories = dm.get_categories(data['user_id'])
     return make_response(categories, 200)
