@@ -6,6 +6,42 @@ class OperationPage extends WFMComponent {
     }
 }
 
+function tableBodyInit() {
+  let json_api 
+  fetch('http://http://127.0.0.1:5000/alltime_transactions', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({email:'mail@mail.com'})
+    }).then(response => {
+      if (response.ok) {
+        // Данные успешно отправлены на бэкэнд
+        json_api = response
+        let str = ''
+        for (var i = 0; i < json_api.length; i++) {
+          var api_object = json_api[i];
+          str +=`
+          <tr>
+            <td>${api_object['date_time_operation']}</td>
+            <td>${api_object['type_operation']}</td>
+            <td>${api_object['sum_operation']}</td>
+          </tr>
+          `
+        }
+      
+        return str
+    } else {
+        // Ошибка при отправке данных на бэкэнд
+        console.error('Error: Sign in failed');
+    }
+    })
+
+
+
+}
+
+
 export const operationPage = new OperationPage({
     selector: 'app-operation-page',
     template: `
@@ -35,63 +71,34 @@ export const operationPage = new OperationPage({
             </div>
             <!-- end link frame -->
         </ul>
+
+
+
+
+
+
+
+
+
         <table style="max-width:70%; margin-left:25%;font-size:20px">
         <thead class='deep-orange-text text-accent-1 text-large'>
         <tr>
-          <th>Компания</th>
-          <th>Operation</th>
-          <th>Item Price</th>
+          <th>Дата операции</th>
+          <th>Транзакция</th>
+          <th>сумма</th>
       </tr>
     </thead>
 
     <tbody class='white-text'>
-      <tr>
-        <td>Мемы</td>
-        <td>expenses</td>
-        <td class='red-text'>$0.87</td>
-      </tr>
-      <tr>
-        <td>Ракета</td>
-        <td>Income</td>
-        <td class='green-text'>$3.76</td>
-        </tr>
-        <tr>
-        <td>Жена</td>
-        <td>expenses</td>
-        <td class='red-text'>$7.00</td>
-        </tr>
-        <tr>
-        <td>Стим</td>
-        <td>Income</td>
-        <td class='green-text'>$0.87</td>
-      </tr>
-      <tr>
-      <td>Кс го</td>
-      <td>expenses</td>
-      <td class='red-text'>$0.87</td>
-        </tr>
-        <tr>
-        <td>Дота</td>
-        <td>expenses</td>
-        <td class='red-text'>$0.87</td>
-    </tr>
-    <tr>
-    <td>Варкрафт</td>
-    <td>Income</td>
-    <td class='green-text'>$0.87</td>
-    </tr>
-    <tr>
-    <td>Пятёрочка</td>
-    <td>Income</td>
-    <td class='green-text'>$0.87</td>
-    </tr>
-    <tr>
-    <td>Магнит</td>
-    <td>expenses</td>
-    <td class='red-text'>$0.87</td>
-    </tr>
-</tbody>
+      ${tableBodyInit()}
+    </tbody>
 </table>
+
+
+
+
+
+
 </div>
 </div>
         
