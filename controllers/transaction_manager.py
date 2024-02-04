@@ -38,26 +38,28 @@ def get_transactions_with_date(user_id: int, date1: datetime, date2: datetime, t
         for item in trs]})
 
 
-def get_transactions_with_category(user_id: int, category: str) -> jsonify:
+def get_transactions_with_category(user_id: int, category: str, type: str) -> jsonify:
     """Пусть возвращает список транзакций с заданной категорией за все время
     'all' = записи по всем категориям """
 
     if category == 'all':
-        trs = db_sess.query(Transaction).filter(Transaction.user_id == user_id).all()
+        trs = db_sess.query(Transaction).filter(Transaction.user_id == user_id)
     else:
-        category_id = db_sess.query(Category).filter(Category.name_category == category)
+        ct = db_sess.query(Category).filter(Category.name_category == category).first()
         trs = db_sess.query(Transaction).filter(and_(
-            Transaction.user_id == user_id, Transaction.category_operation_id == category_id)).all()
-    print(trs)
+            Transaction.user_id == user_id, Transaction.category_operation_id == ct.id))
+
+    if type != 'all':
+        trs = trs.filter(Transaction.type_operation == type)
 
     return jsonify({'transactions': [item.to_dict(
         only=('id', 'sum_operation', 'type_operation', 'date_time_operation', 'message_operation',
               'pictures_str_operation', 'category_operation_id')
-    )
-        for item in trs]})
+)
+    for item in trs.all()]})
 
 
-def add_transaction(user_id: str, type: str, sum: float, date: datetime, description: str, picture: str):
+def add_transaction(user_id: str, type: str, sum: float, date: datetime, description: str, picture: str, category: str):
     """
     Пусть добавляет транзакцию и меняет сумму счета.
     :param session_id: session_id
@@ -68,6 +70,7 @@ def add_transaction(user_id: str, type: str, sum: float, date: datetime, descrip
     :param description: комментарий к транзакции
     :param picture: ссылка на изображение
     """
+    ct = db_sess.query(Category).filter(Category.name_category == category).first()
 
     tr = Transaction()
     tr.user_id = user_id
@@ -76,6 +79,7 @@ def add_transaction(user_id: str, type: str, sum: float, date: datetime, descrip
     tr.date_time_operation = date
     tr.message_operation = description
     tr.pictures_str_operation = picture
+    tr.category_operation_id = ct.id
     db_sess.add(tr)
     db_sess.commit()
 

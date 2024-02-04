@@ -15,7 +15,7 @@ blueprint = flask.Blueprint(
 @blueprint.route('/alltime_transactions', methods=['POST'])
 def get_all_transactions():
     data = request.get_json()
-    trans = dm.get_transactions_with_category(data['user_id'], data['category'])
+    trans = dm.get_transactions_with_category(data['user_id'], type=data['type'], category=data['category'])
     return make_response(trans, 200)
 
 
@@ -34,7 +34,7 @@ def add_transaction():
     date = datetime.strptime(data['date'], '%d%m%Y')
     dm.add_transaction(user_id=data['user_id'], type=data['type'], sum=data['sum'], date=date,
                        description=data['description'],
-                       picture=data['picture'])
+                       picture=data['picture'], category = data['category'])
     return make_response(jsonify({'message': 'transaction_added'}), 200)
 
 
