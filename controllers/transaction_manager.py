@@ -1,4 +1,3 @@
-from typing import Union
 from datetime import datetime
 from flask import jsonify
 from sqlalchemy import and_
@@ -6,7 +5,8 @@ from sqlalchemy import and_
 from data import db_session
 from data.transactions import Transaction
 from data.categories import Category
-from data.bills import Bill
+
+from controllers import user_manager as ur_mg
 
 db_session.global_init("db/database.db")
 db_sess = db_session.create_session()
@@ -68,7 +68,6 @@ def add_transaction(user_id: str, type: str, sum: float, date: datetime, descrip
     :param picture: ссылка на изображение
     """
 
-    bill = db_sess.query(Bill).get(bill_id)
     tr = Transaction()
     tr.user_id = user_id
     tr.type_operation = type
@@ -82,7 +81,15 @@ def add_transaction(user_id: str, type: str, sum: float, date: datetime, descrip
 
 def delete_transaction(transaction_id: int):
     """
-    Удаляет транзакции и меняет сумму счета
-    :param session_id: session id
+    Удаляет транзакции и изменяет баланс
     :param transaction_id: айди транзакции
     """
+
+    tr = db_sess.query(Transaction).get(transaction_id)
+
+    new_balance = ur_mg.get_balance(tr.user_id) - tr.sum_operation
+    ur_mg.set_balance(tr.user_id, new_balance)
+    ur_mg.set_balance(tr.user_id)
+
+    db_sess.delete(tr)
+    db_sess.commit()

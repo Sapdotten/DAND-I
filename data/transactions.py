@@ -22,8 +22,6 @@ class Transaction(SqlAlchemyBase):
 
     user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
     category_operation_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("categories.id"))
-    # bill_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("bill.id"))
 
     user = orm.relationship('User', foreign_keys=[user_id], back_populates='transactions')
     category = orm.relationship('Category')
-    # bill = orm.relationship('Bill')
