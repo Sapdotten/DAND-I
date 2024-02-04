@@ -16,7 +16,7 @@ def get_user_password(username: str) -> Union[None, str]:
 def create_user(user_name: str, email: str, password: str):
     """Создает юзера в бд"""
     user = User()
-    user.first_name = user_name
+    user.name = user_name
     user.email = email
     user.set_password(password)
     db_sess.add(user)

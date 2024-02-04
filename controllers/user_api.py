@@ -16,14 +16,14 @@ blueprint = flask.Blueprint(
 @blueprint.route('/register', methods=['POST'])
 def create_user():
     data = request.get_json()
-    dm.create_user(data['username'], data['email'], data['password'])
+    dm.create_user(data['user_name'], data['email'], data['password'])
     return make_response(jsonify({'message': 'User created successfully'}), 201)
 
 
 @blueprint.route('/login', methods=['POST'])
 def login_user():
     data = request.get_json()
-    user_password = dm.get_user_password(data['username'])
+    user_password = dm.get_user_password(data['user_name'])
     if user_password is None:
         return make_response(jsonify({'message': 'Bad request'}), 400)
 
