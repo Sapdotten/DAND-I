@@ -13,7 +13,7 @@ function tableBodyInit() {
     headers: {
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email:'mail@mail.com'})
+    body: JSON.stringify({email:'mail@mail.com', type:'all', category:'all'})
     }).then(response => {
       if (response.ok) {
         // Данные успешно отправлены на бэкэнд
