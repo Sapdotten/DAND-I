@@ -1,0 +1,15 @@
+{
+  "categories": [
+    {
+      "name_category": "food",
+      "user_id": null
+    },
+    {
+      "name_category": "beauty",
+      "user_id": null
+    },
+    {
+      "name_category": "transport",
+      "user_id": null
+    }]
+}
