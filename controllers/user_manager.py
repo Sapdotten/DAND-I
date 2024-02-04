@@ -9,8 +9,11 @@ db_session.global_init("db/database.db")
 db_sess = db_session.create_session()
 
 
-def get_user_password(username: str) -> Union[None, str]:
+def check_user_password(email: str, password: str) -> Union[None, str]:
     """Должен возвращать пароль юзера по его имени, если пароля нет, то пусть возвращает None"""
+
+    user = db_sess.query(User).filter(User.email == email).first()
+    return user.check_password(password)
 
 
 def create_user(user_name: str, email: str, password: str):
@@ -44,6 +47,7 @@ def set_session_id(username: str, session_id: str):
 
 def delete_user(user_id: int):
     """Пусть удалаяет юзера нахой"""
+
     user = db_sess.query(User).get(user_id)
     db_sess.delete(user)
     db_sess.commit()
@@ -55,5 +59,8 @@ def get_balance(user_id: int):
 
 
 def set_balance(user_id: int, sum: float):
-    user = db_sess.query(User).get(user_id)
     """Прописать установление баланса"""
+
+    user = db_sess.query(User).get(user_id)
+    user.balance = sum
+    db_sess.commit()

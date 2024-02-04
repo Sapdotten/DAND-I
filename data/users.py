@@ -32,7 +32,6 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
 
     transactions = orm.relationship("Transaction", back_populates="user")
     categories = orm.relationship("Category", back_populates="user")
-    # bills = orm.relationship("Bill", back_populates="user")
 
     def __repr__(self):
         return f'<User> {self.id} {self.first_name_user} {self.last_name_user} {self.email}'
