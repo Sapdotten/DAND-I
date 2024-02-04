@@ -4,6 +4,7 @@ from flask import Flask, request, make_response, jsonify, Response
 import controllers.transaction_manager as dm
 from uuid import uuid4
 from datetime import datetime
+from controllers.user_manager import get_user_id
 
 blueprint = flask.Blueprint(
     'transaction_controller',
@@ -15,7 +16,7 @@ blueprint = flask.Blueprint(
 @blueprint.route('/alltime_transactions', methods=['POST'])
 def get_all_transactions():
     data = request.get_json()
-    trans = dm.get_transactions_with_category(data['user_id'], type=data['type'], category=data['category'])
+    trans = dm.get_transactions_with_category(email=data["email"], type=data['type'], category=data['category'])
     return make_response(trans, 200)
 
 
@@ -34,7 +35,7 @@ def add_transaction():
     date = datetime.strptime(data['date'], '%d%m%Y')
     dm.add_transaction(user_id=data['user_id'], type=data['type'], sum=data['sum'], date=date,
                        description=data['description'],
-                       picture=data['picture'], category = data['category'])
+                       picture=data['picture'], category=data['category'])
     return make_response(jsonify({'message': 'transaction_added'}), 200)
 
 

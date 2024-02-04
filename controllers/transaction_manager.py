@@ -38,9 +38,11 @@ def get_transactions_with_date(user_id: int, date1: datetime, date2: datetime, t
         for item in trs]})
 
 
-def get_transactions_with_category(user_id: int, category: str, type: str) -> jsonify:
+def get_transactions_with_category(email: str, category: str, type: str) -> jsonify:
     """Пусть возвращает список транзакций с заданной категорией за все время
     'all' = записи по всем категориям """
+
+    user_id = ur_mg.get_user_id(email)
 
     if category == 'all':
         trs = db_sess.query(Transaction).filter(Transaction.user_id == user_id)
@@ -55,8 +57,8 @@ def get_transactions_with_category(user_id: int, category: str, type: str) -> js
     return jsonify({'transactions': [item.to_dict(
         only=('id', 'sum_operation', 'type_operation', 'date_time_operation', 'message_operation',
               'pictures_str_operation', 'category_operation_id')
-)
-    for item in trs.all()]})
+    )
+        for item in trs.all()]})
 
 
 def add_transaction(user_id: str, type: str, sum: float, date: datetime, description: str, picture: str, category: str):
