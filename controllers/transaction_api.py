@@ -22,8 +22,8 @@ def get_all_transactions():
 @blueprint.route('/transactions', methods=['POST'])
 def get_transactions_between_dates():
     data = request.get_json()
-    date1 = datetime.strptime(data['date_1'], '%d%d%m%m%Y%Y%Y%Y')
-    date2 = datetime.strptime(data['date_2'], '%d%d%m%m%Y%Y%Y%Y')
+    date1 = datetime.strptime(data['date_1'], '%d%m%Y')
+    date2 = datetime.strptime(data['date_2'], '%d%m%Y')
     trans = dm.get_transactions_with_date(data['user_id'], date1, date2, data['type'])
     return make_response(trans, 200)
 
@@ -31,8 +31,8 @@ def get_transactions_between_dates():
 @blueprint.route('/add_transactions', methods=['POST'])
 def add_transaction():
     data = request.get_json()
-    date = datetime.strptime(data['date'], '%d%d%m%m%Y%Y%Y%Y')
-    dm.add_transaction(bill_id=data['bill_id'], type=data['type'], sum=data['sum'], date=date,
+    date = datetime.strptime(data['date'], '%d%m%Y')
+    dm.add_transaction(user_id=data['user_id'], type=data['type'], sum=data['sum'], date=date,
                        description=data['description'],
                        picture=data['picture'])
     return make_response(jsonify({'message': 'transaction_added'}), 200)
@@ -43,5 +43,3 @@ def delete_transaction():
     data = request.get_json()
     dm.delete_transaction(data['transaction_id'])
     return make_response(jsonify({'transactiod delete'}), 200)
-
-

@@ -37,7 +37,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
         return f'<User> {self.id} {self.first_name_user} {self.last_name_user} {self.email}'
 
     def set_password(self, password):
-        self.hashed_password = generate_password_hash(password)
+        self.password = password
 
     def check_password(self, password):
-        return check_password_hash(self.hashed_password, password)
+        return self.password == password

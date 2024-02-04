@@ -13,23 +13,19 @@ blueprint = flask.Blueprint(
 @blueprint.route('/register', methods=['POST'])
 def create_user():
     data = request.get_json()
-    dm.create_user(data['user_name'], data['email'], data['password'])
+    dm.create_user(data['username'], data['email'], data['password'])
     return make_response(jsonify({'message': 'User created successfully'}), 201)
 
 
 @blueprint.route('/login', methods=['POST'])
 def login_user():
     data = request.get_json()
-    is_user_password = dm.check_user_password(data['email'], data['password'])
+    is_user_password = dm.check_user_password(data['username'], data['password'])
     if is_user_password is None:
         return make_response(jsonify({'message': 'Bad request'}), 400)
 
     if is_user_password:
-        session_id = str(uuid4())
-        dm.set_session_id(data['username'], session_id)
-        resp = Response()
-        resp.set_cookie('authorization', session_id)
-        return resp
+        return make_response(jsonify({"message": "Login succesful"}), 200)
     else:
         return make_response(jsonify({'message': 'Uncorrect passsword'}), 401)
 

@@ -21,7 +21,7 @@ def create_user(user_name: str, email: str, password: str):
     user = User()
     user.name = user_name
     user.email = email
-    user.set_password(password)
+    user.password = password
     db_sess.add(user)
     db_sess.commit()
 
